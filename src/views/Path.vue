@@ -84,7 +84,6 @@ export default {
       this.$refs.editor.select(index)
     },
     changed(){
-      console.log("updating markers");
       this.$refs.map.updateMarkers();
     }
   },

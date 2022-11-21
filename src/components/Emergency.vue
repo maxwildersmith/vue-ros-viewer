@@ -1,13 +1,6 @@
 <template>
   <div class="emergency">
-    <v-btn
-      width="100%"
-      dark
-      x-large
-      color="red"
-      class="mx-2"
-      @click="dialog = true"
-    >
+    <v-btn width="100%" dark x-large color="red" class="mx-2" @click="dialog = true">
       Send Data<v-icon x-large>mdi-alert-octagon</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" max-width="425">
@@ -53,16 +46,14 @@ export default {
   methods: {
     sendData() {
       this.dialog = false;
-      
+
       const path = "http://192.168.1.176:5000/waypoints";
       const formData = new FormData();
       formData.append('waypoints', JSON.stringify(this.waypoints));
       axios
         .post(path, formData)
         .then(() => {
-          console.log(
-            "Sent waypoint data"
-          );
+          console.log("Sent waypoint data");
         })
         .catch((error) => {
           console.log(error);
@@ -75,10 +66,6 @@ export default {
       axios
         .get(path)
         .then((resp) => {
-          console.log(
-            resp
-          );
-          console.log(this.status);
           this.status = resp.data.code;
           this.position = resp.data.pos;
         })

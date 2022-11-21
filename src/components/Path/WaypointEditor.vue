@@ -44,11 +44,9 @@ export default {
   },
   methods: {
     select(index) {
-      console.log("rar");
       this.waypoint = this.waypoints[index];
     },
     changed(){
-      console.log("the thing do be doing");
       this.$emit('changed');
     }
   }

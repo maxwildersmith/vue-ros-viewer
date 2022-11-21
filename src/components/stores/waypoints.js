@@ -18,7 +18,6 @@ export const useWaypointStore = defineStore({
             this.waypoints.push({lat: lat, lng: lng, depth_min: depth_min, depth_max: depth_max})
         },
         removeWaypoint(index) {
-            console.log(index, index < this.waypoints.length-1, this.waypoints.length > 1, this.waypoints.length > index);
             if(index < this.waypoints.length-1 || this.waypoints.length > 1 || this.waypoints.length > index){
                 this.waypoints.splice(index,1);
                 console.log("removed")

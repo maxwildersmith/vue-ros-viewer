@@ -100,7 +100,6 @@ export default {
         const el = document.createElement('div')
         el.className = 'marker';
         el.innerHTML = i
-        console.log("asd");
         var way = new mapboxgl.Marker(el).setLngLat([waypoint.lng, waypoint.lat]).addTo(this.map);
         this.markers.push(way);
       });

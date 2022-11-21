@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-2" width="100%">
     <h1 class="font-weight-light text-center">UUV Status:<br /></h1>
-    <h1 class="font-weight-regular text-center display-2"> {{formattedStatus}} :{{store.status}}</h1>
+    <h1 class="font-weight-regular text-center display-2"> {{formattedStatus}}</h1>
   </v-card>
 </template>
 
@@ -12,7 +12,6 @@ import { useWaypointStore } from '@/components/stores/waypoints.js';
 export default {
   setup(){
     const store = useWaypointStore();
-    console.log(store);
 
     return {store};
   },

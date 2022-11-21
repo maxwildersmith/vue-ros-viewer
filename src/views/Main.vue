@@ -64,27 +64,11 @@ export default {
     current_mac_yaw: null,
     current_yaw: 42,
   }),
-  // mounted() {
-  //   this.getMACCurrentData();
-  //   this.getERUCurrentData();
-  //   this.getHikerCurrentData();
-  // },
-  // updated() {
-  //   this.getMACCurrentData();
-  //   this.getERUCurrentData();
-  //   this.getHikerCurrentData();
-  // },
   beforeDestroy() {
     clearInterval(this.interval);
   },
   methods: {
     mapMounted() {
-      // this.getMACCurrentData();
-      // this.getHikerCurrentData();
-      // this.getCurrentTravelTo();
-      // this.getCurrentDropLocation();
-      // this.getMACSearchArea();
-      // this.getCurrentEvac()
       this.interval = setInterval(() => this.updateLoop(), 500);
     },
     updateLoop() {
