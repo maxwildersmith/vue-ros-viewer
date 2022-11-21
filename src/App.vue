@@ -29,6 +29,8 @@ export default {
   text-align: center;
   color: #021d48;*/
   background-color: rgb(218, 218, 218);
+  overflow: hidden;
+  height: 100vh;
 }
 
 </style>

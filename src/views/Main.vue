@@ -1,44 +1,30 @@
 <template>
   <div class="home">
     <v-container fill-height fluid class="pa-2 mt-1">
-      <v-row align="auto">
-        <Map
-          cols="col col-8"
-          @mapMounted="mapMounted"
-          ref="Map"
-        />
+      <v-col>
+      <Map cols="col col-8" @mapMounted="mapMounted" ref="Map" />
+
+      </v-col>
+
 
         <v-col :cols="4">
           <v-container>
             <v-row class="pa-2 mb-3">
-              <GeneralStatus
-                :statusCode="statusCode"
-              />
+              <GeneralStatus/>
             </v-row>
-            <div
-              class="scrollable"
-              style="
-                height: 800px !important;
-                overflow-y: hidden;
-                overflow-x: hidden;
-              "
-            >
-              <v-row class="pa-2">
-                
-                      <DepthPath
-                        :waypoints="waypoints"
-                        editable=false
-                        />
-                      
-              </v-row>
-             
-              <v-row class="pa-2">
-                <DataViewer/>
-              </v-row>
-            </div>
+
+            <v-row class="pa-2">
+              <DepthPath editable=false />
+            </v-row>
+
+            <v-row class="pa-2">
+              <DataViewer />
+            </v-row>
+            <v-row class="pa-2">
+              <Emergency/>
+            </v-row>
           </v-container>
         </v-col>
-      </v-row>
     </v-container>
   </div>
 </template>
@@ -53,8 +39,6 @@ import Map from "@/components/Map.vue";
 import axios from "axios";
 
 export default {
-  name: "",
-  props: ["statusCode", "waypoints"],
   components: {
     Emergency,
     DataViewer,
@@ -63,7 +47,7 @@ export default {
     Map,
   },
   data: () => ({
-  
+
     updatedStage: null,
     updatedVehicle: null,
     mac_data: [],

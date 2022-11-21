@@ -35,24 +35,9 @@
 export default {
   data() {
     return {
-      statusCode: 0,
-      waypoints:  [
-              {lat: 10, lng: 15, depth_max: -2, depth_min: 0}, 
-              {lat: 10, lng: 15, depth_max: -100, depth_min: -90}, 
-              {lat: 15, lng: 20, depth_max: -20, depth_min: -15},
-              {lat: 15, lng: 20, depth_max: -90, depth_min: -80},
-              {lat: 10, lng: 15, depth_max: -100, depth_min: -90}, 
-              {lat: 15, lng: 20, depth_max: -20, depth_min: -15},
-              {lat: 15, lng: 20, depth_max: -90, depth_min: -80}, 
-              {lat: 10, lng: 15, depth_max: -2, depth_min: 0}]
     };
   },
   methods: {
-    setGeneralStatus(statusCode) {
-      this.statusCode = statusCode;
-      console.log(statusCode)
-      this.$forceUpdate();
-    },
   },
 };
 </script>

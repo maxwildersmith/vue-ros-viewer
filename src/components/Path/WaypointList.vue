@@ -3,46 +3,75 @@
     <v-container>
       <v-row justify="center" class="pb-2">
         <h2 class="font-weight-regular text-center display-2 purple--text pr-4">
-          Live Data
+          Waypoints
         </h2>
       </v-row>
       <v-row justify="center" class="pb-2">
-        <h3>Data filters:</h3>
+        <v-btn color="green" class="me-2" @click="moveUp()">
+          <v-icon color="white">mdi-arrow-up</v-icon>
+        </v-btn>
+        <v-btn color="green" class="me-2" @click="moveDown()">
+          <v-icon color="white">mdi-arrow-down</v-icon>
+        </v-btn>
+        <v-btn color="red" class="me-2" @click="remove()">
+          <v-icon color="white">mdi-close-circle-outline</v-icon>
+        </v-btn>
       </v-row>
-      <v-row justify="center" class="pb-2">
-        <v-btn-toggle v-model="filters" multiple rounded group dense color="primary">
-          <template v-for="tag in tags">
-            <v-btn>
-              <v-icon>mdi-{{ tag.icon }}</v-icon>{{ tag.txt }}
-            </v-btn>
-          </template>
-        </v-btn-toggle>
-      </v-row>
-      <v-row class="pb-2">
-        <v-sheet color="grey darken-2" elevation="5" width="100%" rounded>
-          <v-virtual-scroll height="100" item-height="20" :items="dataFeed">
-            <template v-slot:default="{ item }">
-              <v-list-item v-show="item.tag in filters"> {{ item.msg }}
-              </v-list-item>
-
-            </template>
-
-          </v-virtual-scroll>
-        </v-sheet>
+      <v-row class="pb-2" style="max-height: 15em; overflow-y: auto">
+        <v-list-item-group height="100" width="100" v-model="selected" mandatory>
+          <v-list-item v-for="(pt, i) in waypoints" :key="i"> {{ i }}: {{ pt.lat.toFixed(6) }}, {{ pt.lng.toFixed(6) }};
+            {{ pt.depth_min }}~{{ pt.depth_max }}m
+          </v-list-item>
+        </v-list-item-group>
       </v-row>
     </v-container>
   </v-card>
 </template>
-
+<style>
+  .v-item-group{
+    width: 100%;
+  }
+</style>
 <script>
+import { useWaypointStore } from '@/components/stores/waypoints';
 
 export default {
+  setup() {
+    const waypoints = useWaypointStore();
+
+    return waypoints;
+  },
   data() {
-    return {
-      tags: [{ txt: 'General', icon: 'alert-circle', id: 0 }, { txt: 'Power', icon: 'battery-charging-50', id: 1 }, { txt: 'Telemetry', icon: 'crosshairs-gps', id: 2 }, { txt: 'ERROR', icon: 'alert', id: 3 }],
-      dataFeed: [{ tag: 0, msg: 'init' }, { tag: 1, msg: 'Battery at 50%' }, { tag: 3, msg: 'GPS FAILED' }, { tag: 2, msg: 'GPS connected' }, { tag: 2, msg: 'Saved starting location' }],
-      filters: [0, 1, 2, 3, 4],
-    };
+    return { selected: 0 };
+  },
+  watch: {
+    selected(newVal, oldVal) {
+      if (newVal !== oldVal) this.$emit('selected', newVal);
+    },
+  },
+  methods: {
+    moveUp() {
+      if (this.selected > 0) {
+        this.waypointUp(this.selected);
+        this.selected--;
+        this.$emit('changed');
+      }
+    },
+    moveDown() {
+      if (this.selected < this.waypoints.length-1) {
+        this.waypointDown(this.selected);
+        this.selected++;
+        this.$emit('changed');
+
+      }
+    },
+    remove() {
+
+      this.removeWaypoint(this.selected);
+      if(this.selected == this.waypoints.length)
+        this.selected--;
+      this.$emit('changed');
+    }
   }
 };
 </script>

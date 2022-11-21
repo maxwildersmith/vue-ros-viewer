@@ -9,7 +9,7 @@
       <v-row justify="center">
             <h2 class="font-weight-light pr-2" v-if="waypoints.length < 0">Please add waypoints to edit depth</h2>
           <LineChart :chart-options="chartOptions" :chart-data="chartData" 
-            :dataset-id-key="datasetIdKey" :styles="styles" :width="width" :height="height" :tension="0.5" />
+            :dataset-id-key="datasetIdKey" :styles="styles" style="width: 100%" :height="height" :tension="0.5" />
 
       </v-row>
     </v-container>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { useWaypointStore } from '@/components/stores/waypoints';
 import { Line as LineChart } from "vue-chartjs/legacy";
 import {
   Chart as ChartJS,
@@ -38,14 +39,18 @@ ChartJS.register(
 );
 
 export default {
-  props: ['editable', 'waypoints'],
+  props: ['editable'],
   components: {
     LineChart
+  },
+  setup(){
+    const waypoints = useWaypointStore();
+
+    return waypoints;
   },
   data() {
     return {
       height: 200,
-      width: 550,
       datasetIdKey: 'label',
 
 
@@ -64,7 +69,7 @@ export default {
         datasets: [
           {
             borderColor: "#66CCCC",
-            data: this.waypoints.map(pt => (pt.depth_max + pt.depth_min) / 2),
+            data: this.waypoints.map(pt => -(pt.depth_max + pt.depth_min) / 2),
             tension: 0.5,
           }
         ]

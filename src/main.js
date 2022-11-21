@@ -2,15 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify';
-import VueGamepad from 'vue-gamepad';
-
-Vue.use(VueGamepad);
+import {createPinia, PiniaVuePlugin} from 'pinia'
 
 Vue.config.productionTip = false
 Vue.config.silent = true
+Vue.use(PiniaVuePlugin)
+const pinia = createPinia()
 
 new Vue({
   router,
   vuetify,
+  pinia,
   render: h => h(App)
 }).$mount('#app')
