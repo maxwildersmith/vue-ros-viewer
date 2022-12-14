@@ -2,29 +2,28 @@
   <div class="home">
     <v-container fill-height fluid class="pa-2 mt-1">
       <v-col>
-      <Map cols="col col-8" @mapMounted="mapMounted" ref="Map" />
+        <Map cols="col col-8" @mapMounted="mapMounted" ref="Map" />
 
       </v-col>
 
+      <v-col :cols="4">
+        <v-container>
+          <v-row class="pa-2">
+            <GeneralStatus />
+          </v-row>
 
-        <v-col :cols="4">
-          <v-container>
-            <v-row class="pa-2 mb-3">
-              <GeneralStatus/>
-            </v-row>
+          <v-row class="pa-2">
+            <DepthPath editable=false />
+          </v-row>
 
-            <v-row class="pa-2">
-              <DepthPath editable=false />
-            </v-row>
-
-            <v-row class="pa-2">
-              <DataViewer />
-            </v-row>
-            <v-row class="pa-2">
-              <Emergency/>
-            </v-row>
-          </v-container>
-        </v-col>
+          <v-row class="pa-2">
+            <DataViewer />
+          </v-row>
+          <v-row class="pa-2">
+            <Emergency />
+          </v-row>
+        </v-container>
+      </v-col>
     </v-container>
   </div>
 </template>
@@ -32,7 +31,7 @@
 <script>
 // @ is an alias to /src
 import Emergency from "@/components/Emergency.vue";
-import DataViewer from "@/components/DataViewer.vue";
+import DataViewer from "@/components/Data/DataViewer.vue";
 import DepthPath from "@/components/Path/DepthPath.vue";
 import GeneralStatus from "@/components/GeneralStatus.vue";
 import Map from "@/components/Map.vue";

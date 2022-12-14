@@ -25,7 +25,7 @@
         ><h1 class="font-weight-light">Geofence</h1></router-link
       >
     </v-app-bar>
-    <v-main>
+    <v-main style="height:100%">
       <router-view @setGeneralStatus="setGeneralStatus"></router-view>
     </v-main>
   </nav>
@@ -57,5 +57,9 @@ export default {
 
 #nav a:hover {
   text-decoration: underline;
+}
+
+#nav {
+  height: 100vh;
 }
 </style>
