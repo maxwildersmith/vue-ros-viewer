@@ -13,6 +13,7 @@
         </v-card-title>
         <v-card-text justify="center">
           Comms stuffs
+          <v-text-field v-model="ip" label="SSH IP"></v-text-field>
         </v-card-text>
 
         <v-card-actions>
@@ -41,13 +42,14 @@ export default {
     return {
       dialog: false,
       activated: false,
+      ip: "127.0.0.1",
     };
   },
   methods: {
     sendData() {
       this.dialog = false;
 
-      const path = "http://192.168.1.176:5000/waypoints";
+      const path = "http://10.5.85.79:5000/waypoints";
       const formData = new FormData();
       formData.append('waypoints', JSON.stringify(this.waypoints));
       axios
@@ -62,7 +64,7 @@ export default {
     getStatus() {
       this.dialog = false;
 
-      const path = "http://192.168.1.176:5000/status";
+      const path = "http://10.5.85.79:5000/status";
       axios
         .get(path)
         .then((resp) => {

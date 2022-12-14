@@ -22,6 +22,7 @@ import { Line as LineChart } from "vue-chartjs/legacy";
 import {
   Chart as ChartJS,
   Title,
+  Filler,
   Tooltip,
   LineElement,
   LinearScale,
@@ -30,6 +31,7 @@ import {
 } from "chart.js";
 
 ChartJS.register(
+  Filler,
   Title,
   Tooltip,
   LineElement,
@@ -57,20 +59,30 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } }
+        plugins: { legend: { display: false }}
       },
     };
   },
   computed: {
     chartData() {
-
       let out = {
         labels: [...Array(this.waypoints.length).keys()],
         datasets: [
           {
+            label: "Min Depth",
             borderColor: "#66CCCC",
-            data: this.waypoints.map(pt => -(pt.depth_max + pt.depth_min) / 2),
-            tension: 0.5,
+            data: this.waypoints.map(pt => -pt.depth_min),
+            tension: 0.3,
+            backgroundColor: "#66aaaa",
+          }, 
+          {
+            label: "Max Depth",
+            borderColor: "#CC6666",
+            data: this.waypoints.map(pt => -pt.depth_max),
+            tension: 0.3,
+            backgroundColor: "#33AAAA50",
+            fill: '-1',
+
           }
         ]
       }

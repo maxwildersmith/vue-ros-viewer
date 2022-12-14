@@ -2,6 +2,9 @@
   <v-card class="pa-2" width="100%">
     <h1 class="font-weight-light text-center">UUV Status:<br /></h1>
     <h1 class="font-weight-regular text-center display-2"> {{formattedStatus}}</h1>
+    <p align="center">
+    Current Position: {{store.position}}
+    </p>
   </v-card>
 </template>
 
