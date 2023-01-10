@@ -14,13 +14,13 @@
         <v-text-field v-model.number="waypoint.lng" type="number" label="Longitude" step=".00001" @input="changed"></v-text-field>
       </v-row>
       <v-row>
-        <v-slider v-model.number="waypoint.depth_min" min="0" max="500" label="Min Depth"><template v-slot:append>
+        <v-slider v-model.number="waypoint.depth_min" min="0" max="100" label="Min Depth"><template v-slot:append>
             <v-text-field v-model.number="waypoint.depth_min" class="mt-0 pt-0" hide-details single-line type="number"
               style="width: 60px"></v-text-field>
           </template></v-slider>
       </v-row>
       <v-row>
-        <v-slider v-model.number="waypoint.depth_max" min="0" max="500" label="Max Depth"><template v-slot:append>
+        <v-slider v-model.number="waypoint.depth_max" min="0" max="100" label="Max Depth"><template v-slot:append>
             <v-text-field v-model.number="waypoint.depth_max" class="mt-0 pt-0" hide-details single-line type="number"
               style="width: 60px"></v-text-field>
           </template></v-slider>

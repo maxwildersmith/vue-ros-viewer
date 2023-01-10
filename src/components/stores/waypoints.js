@@ -5,6 +5,7 @@ export const useWaypointStore = defineStore({
         return {waypoints: [],
                 msgs: [],
                 status: 0,
+                ip: '127.0.0.0',
                 position: [0,0,0]}
     },
     getters: {

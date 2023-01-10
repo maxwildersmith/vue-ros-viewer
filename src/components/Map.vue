@@ -13,6 +13,11 @@ export default {
     const waypoints = useWaypointStore();
     return waypoints;
   },
+  watch:{
+    position(newPos, oldPos){
+      this.updatePos()
+    }
+  },
   props: {
     cols: {
       default: "",
@@ -91,6 +96,16 @@ export default {
       return map;
     },
 
+    updatePos(){
+      if(this.sub===null){
+        const el = document.createElement('div');
+        el.className = 'sub';
+        this.sub = new mapboxgl.Marker(el);
+      } 
+      this.sub.setLngLat([this.position[1], this.position[0]]).addTo(this.map);
+      console.log('moved');
+    },
+
     updateMarkers() {
       if(this.markers.length>0)
         this.markers.forEach(waypoint => {waypoint.remove(); });
@@ -100,7 +115,8 @@ export default {
         const el = document.createElement('div')
         el.className = 'marker';
         el.innerHTML = i
-        var way = new mapboxgl.Marker(el).setLngLat([waypoint.lng, waypoint.lat]).addTo(this.map);
+        var way = new mapboxgl.Marker(el);
+        way.setLngLat([waypoint.lng, waypoint.lat]).addTo(this.map);
         this.markers.push(way);
       });
 
@@ -112,6 +128,7 @@ export default {
       return {
         map: null, // Reference to the mapbox object
         markers: [],
+        sub: null,
       };
   },
   mounted() {
@@ -128,6 +145,20 @@ export default {
   background-size: cover;
   width: 1.5em;
   height: 1.5em;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3em;
+}
+
+.sub {
+  background-color: lightblue;
+  background-size: cover;
+  width: 1em;
+  height: 1em;
   border-radius: 50%;
   position: absolute;
   cursor: pointer;

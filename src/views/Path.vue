@@ -80,7 +80,6 @@ export default {
       this.updatedVehicle = vehicle;
     },
     waypointSelected(index){
-      console.log(index);
       this.$refs.editor.select(index)
     },
     changed(){

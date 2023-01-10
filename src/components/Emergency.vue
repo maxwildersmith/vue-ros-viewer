@@ -18,8 +18,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-
-          <v-btn color="secondary" text @click="getStatus"> Get Status </v-btn>
+          <v-btn color="secondary" text @click="toggleStatus"> Toggle Status {{ 'On' ? activated : 'Off' }} </v-btn>
 
           <v-btn color="primary" text @click="sendData"> Send Waypoint </v-btn>
         </v-card-actions>
@@ -41,15 +40,26 @@ export default {
   data() {
     return {
       dialog: false,
-      activated: false,
-      ip: "127.0.0.1",
+      activated: true,
+      interId: null,
     };
   },
+  mounted() {
+    if(this.interId==null){
+      this.interId = setInterval(this.getStatus, 1000);
+    }
+  },
   methods: {
+    toggleStatus(){
+      this.activated = !this.activated;
+      this.dialog = false;
+
+
+    },
     sendData() {
       this.dialog = false;
 
-      const path = "http://10.5.85.79:5000/waypoints";
+      const path = "http://"+this.ip+":5000/waypoints";
       const formData = new FormData();
       formData.append('waypoints', JSON.stringify(this.waypoints));
       axios
@@ -62,18 +72,18 @@ export default {
         });
     },
     getStatus() {
-      this.dialog = false;
-
-      const path = "http://10.5.85.79:5000/status";
-      axios
-        .get(path)
-        .then((resp) => {
-          this.status = resp.data.code;
-          this.position = resp.data.pos;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if(this.activated){
+        const path = "http://"+this.ip+":5000/status";
+        axios
+          .get(path)
+          .then((resp) => {
+            this.status = resp.data.code;
+            this.position = resp.data.pos;
+          })
+          .catch((error) => {
+            //console.log('error connecting, retrying...');
+          });
+      }
     },
   },
 };
