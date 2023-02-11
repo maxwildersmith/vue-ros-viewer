@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build"
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build"
   },
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.2.2",
@@ -23,6 +23,7 @@
     "vue-chartjs": "^4.1.2",
     "vue-gamepad": "^1.1.1",
     "vue-router": "^3.5.1",
+    "vue-threejs": "^0.2.0-alpha.1",
     "vuetify": "^2.2.11"
   },
   "devDependencies": {
