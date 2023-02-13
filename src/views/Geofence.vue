@@ -37,6 +37,8 @@
 <script>
 import Viewer from "@/components/viewer.vue";
 import Map from "@/components/Map.vue";
+import { useWaypointStore } from '@/components/stores/waypoints';
+
 
 export default {
   name: "",
@@ -44,6 +46,16 @@ export default {
   components: {
     Viewer,
     Map,
+  },
+  setup(){
+    const waypoints = useWaypointStore();
+
+    return waypoints;
+  },
+  watch:{
+    position(newPos, oldPos){
+      this.$refs.view.setQuaternion(newPos[3], newPos[4], newPos[5], newPos[6]);
+    }
   },
 
   data: () => ({

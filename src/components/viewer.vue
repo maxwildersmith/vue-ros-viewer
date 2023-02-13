@@ -25,7 +25,6 @@ export default {
     model: { type: String, default: "glider.glb" },
     width: { type: Number, default: 100 },
     height: { type: Number, default: 100 },
-    spin: { type: Object, default(rawProps) { return { x: 0.0002, y: 0.0003, z: 0.0000 } } },
   },
   computed: {
     cssProps() {
@@ -54,9 +53,13 @@ export default {
     this.sat.scene.rotation.x = roll * 3.14/180;
     this.sat.scene.rotation.y = -yaw * 3.14/180;
     this.sat.scene.rotation.z = pitch * 3.14/180;
-    console.log(roll);
+    console.log(this.sat);
     console.log(pitch);
     console.log(yaw);
+  },
+  setQuaternion(x,y,z,w){
+    this.sat.scene.quaternion.set(x, y, z,w);
+    console.log('rotated');
   },
     init() {
       // set container
